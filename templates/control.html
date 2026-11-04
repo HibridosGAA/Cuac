@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <div class="header-section">
+        <h1 class="page-title">Terminal de Control</h1>
+        <p class="page-subtitle">Gestión de estado operativo de la entidad neuronal.</p>
+    </div>
+    
+    <div class="control-panel">
+        <div class="status-card">
+            <h3>Estado del Núcleo de Procesamiento</h3>
+            <p class="status-desc">Determina si la IA puede procesar y emitir respuestas.</p>
+            
+            <div class="switch-container">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="ai-toggle" {% if activo %}checked{% endif %}>
+                    <span class="toggle-slider"></span>
+                </label>
+                <span id="toggle-label" class="toggle-label {% if activo %}status-active{% else %}status-inactive{% endif %}">
+                    {% if activo %}EN LÍNEA{% else %}DESCONECTADO{% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const toggle = document.getElementById('ai-toggle');
+    const label = document.getElementById('toggle-label');
+    
+    toggle.addEventListener('change', async (e) => {
+        const estado = e.target.checked;
+        try {
+            const res = await fetch('/api/toggle', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({estado: estado})
+            });
+            const data = await res.json();
+            
+            if(data.success) {
+                if(data.activo) {
+                    label.textContent = 'EN LÍNEA';
+                    label.className = 'toggle-label status-active';
+                } else {
+                    label.textContent = 'DESCONECTADO';
+                    label.className = 'toggle-label status-inactive';
+                }
+            } else {
+                // Revertir si hubo error
+                toggle.checked = !estado;
+            }
+        } catch (error) {
+            console.error("Error al cambiar estado:", error);
+            toggle.checked = !estado;
+        }
+    });
+</script>
+{% endblock %}

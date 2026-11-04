@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-container">
+    <div class="header-section">
+        <h1 class="page-title">Registro Global de Datos</h1>
+        <p class="page-subtitle">Visualización completa de las interacciones de todos los usuarios almacenadas en la base de datos central.</p>
+    </div>
+    
+    <div class="table-wrapper">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Fecha y Hora</th>
+                    <th>Usuario</th>
+                    <th>Entidad</th>
+                    <th>Registro de Datos</th>
+                    <th>Fase Evolutiva</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in historial %}
+                <tr>
+                    <td class="col-date">{{ fila[0] }}</td>
+                    <td class="col-user">{{ fila[1] }}</td>
+                    <td class="col-entity">
+                        <span class="badge {% if fila[2] == 'usuario' %}badge-user{% else %}badge-ai{% endif %}">
+                            {{ fila[2] | upper }}
+                        </span>
+                    </td>
+                    <td class="col-msg">{{ fila[3] }}</td>
+                    <td class="col-stage">Fase {{ fila[4] }}</td>
+                </tr>
+                {% endfor %}
+                {% if not historial %}
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 20px;">No existen registros en la base de datos.</td>
+                </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

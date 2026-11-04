@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="login-wrapper">
+    <div class="login-box">
+        <h1 class="brand" style="margin-bottom: 5px;">Red Neuronal Pato</h1>
+        <p class="subtitle">Identificación requerida para interactuar con la entidad.</p>
+        
+        <form action="/login" method="POST" class="login-form">
+            <div class="input-group">
+                <label for="username">Identificador de Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Ingrese su nombre o apodo" required autocomplete="off">
+            </div>
+            <button type="submit" class="btn-primary">Acceder al Sistema</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

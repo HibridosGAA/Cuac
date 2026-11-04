@@ -1,0 +1,167 @@
+
+:root {
+    --bg-base: #111111;
+    --bg-surface: #1a1a1a;
+    --bg-elevated: #242424;
+    --border: #333333;
+    
+    --text-primary: #e0e0e0;
+    --text-secondary: #9e9e9e;
+    
+    /* Amarillo suave/pastel elegante */
+    --accent: #dcd086; 
+    --accent-hover: #c4b868;
+    --accent-dim: rgba(220, 208, 134, 0.1);
+    
+    --danger: #d96c6c;
+    --success: #83c483;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+body { display: flex; height: 100vh; background-color: var(--bg-base); color: var(--text-primary); overflow: hidden; }
+
+/* Tipografía y Brand */
+.brand { color: var(--accent); font-weight: 600; letter-spacing: 0.5px; }
+.subtitle { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px; }
+
+/* Login */
+.login-wrapper { display: flex; justify-content: center; align-items: center; width: 100%; height: 100%; }
+.login-box { background: var(--bg-surface); padding: 40px; border-radius: 8px; border: 1px solid var(--border); width: 100%; max-width: 400px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+.input-group { margin-bottom: 20px; text-align: left; }
+.input-group label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
+.input-group input { width: 100%; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-primary); padding: 12px; border-radius: 4px; font-size: 1rem; outline: none; transition: border-color 0.2s; }
+.input-group input:focus { border-color: var(--accent); }
+.btn-primary { width: 100%; background: var(--accent); color: var(--bg-base); border: none; padding: 12px; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.btn-primary:hover { background: var(--accent-hover); }
+
+/* Sidebar (Estilo Gemini UI) */
+.sidebar { width: 280px; background: var(--bg-surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+.logo-container { padding: 24px 20px; cursor: pointer; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.logo-container:hover { background: var(--bg-elevated); }
+.version { font-size: 0.75rem; color: var(--bg-base); background: var(--accent); padding: 2px 6px; border-radius: 4px; font-weight: bold; }
+
+.user-profile { padding: 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+.avatar-circle { width: 36px; height: 36px; background: var(--accent-dim); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; border: 1px solid var(--accent); }
+.username { font-weight: 500; font-size: 0.95rem; }
+
+.nav-links { list-style: none; padding: 16px 12px; flex-grow: 1; }
+.nav-links li { margin-bottom: 4px; }
+.nav-links a { display: block; padding: 10px 16px; color: var(--text-secondary); text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: all 0.2s; }
+.nav-links a:hover { color: var(--text-primary); background: var(--bg-elevated); }
+.nav-links a.active { color: var(--accent); background: var(--accent-dim); font-weight: 500; }
+
+.nav-footer { padding: 16px; border-top: 1px solid var(--border); }
+.btn-logout { display: block; text-align: center; padding: 10px; color: var(--text-secondary); text-decoration: none; border: 1px solid var(--border); border-radius: 6px; font-size: 0.85rem; transition: 0.2s; }
+.btn-logout:hover { color: var(--danger); border-color: var(--danger); }
+
+/* Contenido Principal */
+.content { flex-grow: 1; display: flex; flex-direction: column; background: var(--bg-base); position: relative; overflow: hidden; }
+
+/* Chat Layout: Historial Personal + Área Principal */
+.chat-layout { display: flex; height: 100%; width: 100%; }
+
+.history-sidebar { width: 300px; background: var(--bg-base); border-right: 1px solid var(--border); display: flex; flex-direction: column; }
+.history-title { padding: 16px; font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+.history-list { flex-grow: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.history-list::-webkit-scrollbar { width: 4px; }
+.history-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+.history-item { padding: 12px; border-radius: 6px; font-size: 0.9rem; display: flex; flex-direction: column; gap: 4px; }
+.history-item.user-item { background: var(--bg-surface); border-left: 2px solid var(--border); }
+.history-item.ai-item { background: var(--accent-dim); border-left: 2px solid var(--accent); color: var(--accent); }
+.history-time { font-size: 0.7rem; color: var(--text-secondary); align-self: flex-end; }
+
+.chat-main { flex-grow: 1; display: flex; flex-direction: column; position: relative; }
+
+/* Robot NVIDIA Style (CSS Art) */
+.render-viewport { height: 260px; background: #0a0a0a; border-bottom: 1px solid var(--border); display: flex; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+.viewport-label { position: absolute; top: 12px; left: 16px; font-family: monospace; font-size: 0.75rem; color: var(--accent); border: 1px solid var(--accent); padding: 2px 6px; border-radius: 2px; }
+
+/* Estructura del Robot */
+.robot-model { position: relative; width: 120px; height: 200px; transform: scale(1.1); transition: transform 0.3s; }
+/* Colores inspirados en el robot lila/amarillo, pero adaptados al tema oscuro con acento amarillo suave */
+.robot-head { width: 80px; height: 50px; background: #9b8ab2; border-radius: 30px 30px 5px 5px; position: absolute; top: 10px; left: 20px; z-index: 3; box-shadow: inset 0 -5px 10px rgba(0,0,0,0.3); }
+.robot-lens { width: 34px; height: 34px; background: #3a3a4a; border-radius: 50%; position: absolute; top: 8px; left: 23px; border: 3px solid #6cd4d4; display: flex; align-items: center; justify-content: center; }
+.robot-eye { width: 12px; height: 12px; background: #111; border-radius: 50%; box-shadow: inset -2px -2px 4px rgba(255,255,255,0.4); transition: transform 0.1s; }
+.robot-beak { width: 86px; height: 8px; background: var(--accent); position: absolute; left: -3px; border-radius: 4px; transform-origin: left center; }
+.robot-beak.top { top: 50px; }
+.robot-beak.bottom { top: 60px; }
+
+.robot-neck { width: 24px; height: 40px; background: #222; position: absolute; top: 60px; left: 48px; z-index: 1; border-left: 2px solid #555; }
+.robot-torso { width: 60px; height: 40px; background: #9b8ab2; border-radius: 12px; position: absolute; top: 100px; left: 30px; z-index: 2; box-shadow: inset 0 -4px 8px rgba(0,0,0,0.3); }
+
+.robot-leg-group { position: absolute; top: 140px; left: 25px; width: 70px; height: 60px; display: flex; justify-content: space-between; }
+.robot-leg { width: 22px; height: 45px; background: #222; position: relative; border-radius: 4px; }
+.robot-foot { width: 34px; height: 12px; background: var(--accent); position: absolute; bottom: -12px; left: -6px; border-radius: 6px 6px 2px 2px; }
+
+/* Animaciones del Robot */
+@keyframes robot-walk {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+@keyframes robot-talk-top { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-8deg); } }
+@keyframes robot-talk-bottom { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(8deg); } }
+@keyframes eye-scan { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+
+.robot-model.thinking { animation: robot-walk 0.5s infinite; }
+.robot-model.thinking .robot-eye { animation: eye-scan 1s infinite; background: var(--accent); }
+.robot-model.talking .robot-beak.top { animation: robot-talk-top 0.15s infinite; }
+.robot-model.talking .robot-beak.bottom { animation: robot-talk-bottom 0.15s infinite; }
+.robot-model.offline { filter: grayscale(1) brightness(0.4); }
+
+/* Área de Mensajes Stream */
+.chat-stream { flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
+.chat-stream::-webkit-scrollbar { width: 6px; }
+.chat-stream::-webkit-scrollbar-thumb { background: var(--border); }
+.message { max-width: 85%; padding: 14px 18px; border-radius: 8px; line-height: 1.5; font-size: 0.95rem; }
+.message.system { align-self: center; font-family: monospace; color: var(--text-secondary); font-size: 0.8rem; background: transparent; }
+.message.usuario { align-self: flex-end; background: var(--bg-surface); border: 1px solid var(--border); color: var(--text-primary); border-bottom-right-radius: 0; }
+.message.pato { align-self: flex-start; background: transparent; color: var(--text-primary); border-left: 2px solid var(--accent); padding-left: 16px; }
+
+/* Input */
+.input-panel { padding: 20px 24px; background: var(--bg-surface); border-top: 1px solid var(--border); display: flex; gap: 12px; }
+.input-panel input { flex-grow: 1; background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text-primary); padding: 14px 16px; border-radius: 6px; font-size: 1rem; outline: none; transition: 0.2s; }
+.input-panel input:focus { border-color: var(--accent); }
+.input-panel input:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-send { background: var(--accent); color: var(--bg-base); border: none; padding: 0 24px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: 0.2s; }
+.btn-send:hover:not(:disabled) { background: var(--accent-hover); }
+.btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* Global Pages (Historial & Control) */
+.page-container { padding: 40px; max-width: 1000px; margin: 0 auto; width: 100%; overflow-y: auto; height: 100%; }
+.header-section { margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+.page-title { font-size: 1.5rem; color: var(--text-primary); margin-bottom: 8px; }
+.page-subtitle { color: var(--text-secondary); font-size: 0.95rem; }
+
+/* Tabla Data */
+.table-wrapper { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+.data-table { width: 100%; border-collapse: collapse; text-align: left; }
+.data-table th, .data-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.data-table th { background: var(--bg-elevated); color: var(--text-secondary); font-weight: 500; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.col-date { color: var(--text-secondary); font-family: monospace; font-size: 0.85rem; width: 160px; }
+.col-user { font-weight: 500; }
+.col-msg { color: var(--text-primary); }
+.col-stage { color: var(--text-secondary); font-size: 0.85rem; }
+
+.badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; }
+.badge-user { background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid var(--border); }
+.badge-ai { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent); }
+
+/* Panel Control */
+.control-panel { display: grid; gap: 24px; }
+.status-card { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 8px; padding: 24px; }
+.status-card h3 { margin-bottom: 8px; color: var(--text-primary); font-size: 1.1rem; }
+.status-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 24px; }
+.switch-container { display: flex; align-items: center; gap: 16px; }
+
+/* Custom Switch Moderno */
+.toggle-switch { position: relative; display: inline-block; width: 52px; height: 28px; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--border); transition: .3s; border-radius: 28px; }
+.toggle-slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: #fff; transition: .3s; border-radius: 50%; }
+input:checked + .toggle-slider { background-color: var(--accent); }
+input:checked + .toggle-slider:before { transform: translateX(24px); background-color: var(--bg-base); }
+
+.toggle-label { font-family: monospace; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; }
+.status-active { color: var(--accent); }
+.status-inactive { color: var(--danger); }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Autónomo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    {% if session.get('username') %}
+    <nav class="sidebar">
+        <div class="logo-container" onclick="window.location.href='/'">
+            <h2 class="brand">Red Neuronal Pato</h2>
+            <span class="version">v2.0</span>
+        </div>
+        
+        <div class="user-profile">
+            <div class="avatar-circle">{{ session['username'][0] | upper }}</div>
+            <span class="username">{{ session['username'] }}</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/chat" class="{% if request.path == '/chat' %}active{% endif %}">Interfaz de Comunicación</a></li>
+            <li><a href="/historial" class="{% if request.path == '/historial' %}active{% endif %}">Registro Global</a></li>
+            <li><a href="/control" class="{% if request.path == '/control' %}active{% endif %}">Panel de Control</a></li>
+        </ul>
+        
+        <div class="nav-footer">
+            <a href="/logout" class="btn-logout">Cerrar Sesión</a>
+        </div>
+    </nav>
+    {% endif %}
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

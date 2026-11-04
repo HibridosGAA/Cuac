@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="chat-layout">
+    <!-- Panel Izquierdo: Lista de conversaciones del usuario actual -->
+    <div class="history-sidebar">
+        <h3 class="history-title">Registro de Sesión</h3>
+        <div class="history-list">
+            {% for msg in historial %}
+                <div class="history-item {% if msg.emisor == 'usuario' %}user-item{% else %}ai-item{% endif %}">
+                    <span class="history-text">{{ msg.mensaje }}</span>
+                    <span class="history-time">{{ msg.fecha.split(' ')[1][:5] }}</span>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Panel Derecho: Chat Activo -->
+    <div class="chat-main">
+        <!-- Render del Robot en lugar del pato pixelado -->
+        <div class="render-viewport">
+            <div class="robot-model" id="robot-model">
+                <div class="robot-head">
+                    <div class="robot-lens">
+                        <div class="robot-eye" id="robot-eye"></div>
+                    </div>
+                    <div class="robot-beak top" id="beak-top"></div>
+                    <div class="robot-beak bottom" id="beak-bottom"></div>
+                </div>
+                <div class="robot-neck"></div>
+                <div class="robot-torso"></div>
+                <div class="robot-leg-group">
+                    <div class="robot-leg left">
+                        <div class="robot-foot"></div>
+                    </div>
+                    <div class="robot-leg right">
+                        <div class="robot-foot"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="viewport-label">NVD-PT01 [En línea]</div>
+        </div>
+
+        <div class="chat-stream" id="chat-box">
+            {% if not activo %}
+            <div class="message system">Atención: El sistema se encuentra actualmente desconectado.</div>
+            {% else %}
+            <div class="message system">Conexión establecida. Entidad lista para recibir datos.</div>
+            {% endif %}
+        </div>
+
+        <div class="input-panel">
+            <input type="text" id="user-input" placeholder="Transmita un mensaje al sistema..." autocomplete="off" {% if not activo %}disabled{% endif %}>
+            <button id="send-btn" class="btn-send" {% if not activo %}disabled{% endif %}>Enviar</button>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

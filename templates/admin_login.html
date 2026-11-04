@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="login-wrapper">
+    <div class="login-box">
+        <h2 class="brand">Acceso Restringido</h2>
+        <p class="subtitle">Se requieren credenciales de administrador.</p>
+        
+        <form action="/auth_admin" method="POST" class="login-form">
+            <input type="hidden" name="target" value="{{ target }}">
+            <div class="input-group">
+                <label for="password">Clave de Seguridad</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn-primary">Verificar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
